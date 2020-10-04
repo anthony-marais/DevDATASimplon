@@ -1,0 +1,65 @@
+Les commandes principales du terminal
+
+-cd   = change-directory
+-pwd  = print working directory
+-cd /tmp
+-pwd
+- cd~
+pwd
+
+
+Création de repertoire
+
+mkdir = creation de dossier = make directory
+
+- mkdir ~/activite_linux
+- cd ~/activite_linux 
+
+ou 
+
+-cd 
+- mkdir activite_linux
+- cd activite_linux
+
+
+
+
+Ensuite créer 2 fichier vides dans le dossier activite_linux
+
+touch = crée un fichier
+
+- touch activite_1.txt
+- touch activite_2.py
+
+
+
+ré-afficher le contenu du fichier 
+
+- ls
+
+
+
+faire les manipulation suivantes :
+
+-cd /tmp
+-ls         
+-ls -a 
+-ls -l    = ls listing
+
+
+man = au Manuel des commandes
+man ls = ls help donne toute les commande possible avec ls
+man mkdir = donne toute les commande avec mkdir
+man cd = donne toute les commande avec cd
+
+supprimer le fichier activite_1.txt :
+- cd ~/activite_linux
+- rm activite_1.txt
+
+verifier que le contenu a bien disparu --> ls 
+
+supprimer le dossier activite_linux avec son contenu :
+cd ~
+rm -Rf activite_linux
+
+

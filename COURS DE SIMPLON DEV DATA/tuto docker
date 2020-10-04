@@ -1,0 +1,67 @@
+Je vais vous présenter un tuto pour vous initier à docker et déployer vos premier container
+
+tout d'abbord nous allons installer docker sur notre machine (je suppose que tout le monde et sous ubuntu) que ce soit la version 18.04 ou la 20.04 rien ne changera 
+
+ouvrez vôtre terminal
+
+étape 1:
+
+mettre à jour votre liste de paquets existante:
+
+sudo apt update
+
+installez quelques paquets pré-requis qui permettent à ʻapt` d'utiliser les paquets via HTTPS:
+
+sudo apt install apt-transport-https ca-certificates curl software-properties-common
+
+Ajoutez ensuite la clé GPG du référentiel Docker officiel à votre système:
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+Ajoutez le référentiel Docker aux sources APT:
+
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+
+Ensuite, mettez à jour la base de données de paquets avec les paquets Docker du référentiel récemment ajouté:
+
+sudo apt update
+
+Assurez-vous que vous êtes sur le point d'installer à partir du référentiel Docker au lieu du référentiel par défaut Ubuntu:
+
+apt-cache policy docker-ce
+
+l'output devrais ressembler a ceci:
+
+docker-ce:
+  Installed: (none)
+  Candidate: 18.03.1~ce~3-0~ubuntu
+  Version table:
+     18.03.1~ce~3-0~ubuntu 500
+        500 https://download.docker.com/linux/ubuntu bionic/stable amd64 Packages
+        
+        
+installez Docker:
+
+sudo apt install docker-ce
+
+Docker devrait maintenant être installé, le démo n démarré et le processus activé pour pouvoir partir au démarrage. Vérifiez qu'il est en cours d'exécution:
+
+sudo systemctl status docker
+
+
+La sortie de données devrait être semblable à celle-ci, montrant que le service est actif et en cours d'exécution:
+
+Output
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/lib/systemd/system/docker.service; enabled; vendor preset: enabled)
+   Active: active (running) since Thu 2018-07-05 15:08:39 UTC; 2min 55s ago
+     Docs: https://docs.docker.com
+ Main PID: 10096 (dockerd)
+    Tasks: 16
+   CGroup: /system.slice/docker.service
+           ├─10096 /usr/bin/dockerd -H fd://
+           └─10113 docker-containerd --config /var/run/docker/containerd/containerd.toml
+           
+           
+           
+

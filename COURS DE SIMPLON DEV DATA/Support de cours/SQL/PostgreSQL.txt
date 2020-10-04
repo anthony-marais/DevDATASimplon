@@ -1,0 +1,19 @@
+Post-Grèss-Q-L.
+
+PostgreSQL , est un SGBD-Relationnel il est libre et gratuit, donc OPEN-SOURCE
+
+il est issu des recherche du professeur Michael Stonebraker, de l'université Berkeley en Californie en 1986.
+
+Depuis 1996 le développement est mené pas postgreSQL Developpement Group. Qui est un groupe de développeurs de haut niveau et indépendant de grande firmes informatiques, il reste néanmoins financé entre autres par Redhat et fujitsu.
+
+Il dispose d'une communauté active qui contribue à l'enrichissement de PostgreSQL.
+
+
+PostgreSQL est dispo sous license BSD ( Berkeley Software Distbution )
+
+cette licence dit : « Nous mettons ce logiciel à votre disposition en l'état. Faites en ce que vous voulez. Vous pouvez le modifier ou le vendre si vous le souhaitez. Nous vous demandons juste de rappeler que nous en sommes les créateurs. »
+
+
+Conclusion
+
+c'est un produit mature, parfaitement à même de remplacer les produits commerciaux en entreprise, sans en avoir le coût, direct ou indirect.

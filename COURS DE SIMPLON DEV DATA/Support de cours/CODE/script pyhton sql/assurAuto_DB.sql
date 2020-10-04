@@ -1,0 +1,237 @@
+-- MySQL dump 10.13  Distrib 5.7.30, for Linux (x86_64)
+--
+-- Host: 127.0.0.1    Database: assur_auto
+-- ------------------------------------------------------
+-- Server version	5.7.30-0ubuntu0.18.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `AGENCES`
+--
+
+DROP TABLE IF EXISTS `AGENCES`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `AGENCES` (
+  `AG_ID` int(11) NOT NULL,
+  `AG_ADRESSE` varchar(70) NOT NULL,
+  `AG_CP` varchar(5) NOT NULL,
+  `AG_VILLE` varchar(40) NOT NULL,
+  `AG_TEL` varchar(15) NOT NULL,
+  PRIMARY KEY (`AG_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `AGENCES`
+--
+
+LOCK TABLES `AGENCES` WRITE;
+/*!40000 ALTER TABLE `AGENCES` DISABLE KEYS */;
+INSERT INTO `AGENCES` VALUES (1,'1337 Agency Area','75000','PARIS','040000000');
+/*!40000 ALTER TABLE `AGENCES` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `AVENANTS`
+--
+
+DROP TABLE IF EXISTS `AVENANTS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `AVENANTS` (
+  `AV_ID` int(11) NOT NULL,
+  `AV_DATE` date NOT NULL,
+  `AV_TARIF` float NOT NULL,
+  `AV_BONUS_MALUS` float NOT NULL,
+  `AV_CO_FK` int(11) NOT NULL,
+  PRIMARY KEY (`AV_ID`),
+  KEY `fk_AVENANTS_1_idx` (`AV_CO_FK`),
+  CONSTRAINT `fk_AVENANTS_1` FOREIGN KEY (`AV_CO_FK`) REFERENCES `CONTRATS` (`CO_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `AVENANTS`
+--
+
+LOCK TABLES `AVENANTS` WRITE;
+/*!40000 ALTER TABLE `AVENANTS` DISABLE KEYS */;
+/*!40000 ALTER TABLE `AVENANTS` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `CLIENTS`
+--
+
+DROP TABLE IF EXISTS `CLIENTS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `CLIENTS` (
+  `CL_ID` int(11) NOT NULL,
+  `CL_NOM` varchar(30) NOT NULL,
+  `CL_PRENOM` varchar(30) NOT NULL,
+  `CL_ADRESSE` varchar(70) NOT NULL,
+  `CL_CP` varchar(5) NOT NULL,
+  `CL_VILLE` varchar(30) NOT NULL,
+  `CL_TEL` varchar(15) NOT NULL,
+  PRIMARY KEY (`CL_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `CLIENTS`
+--
+
+LOCK TABLES `CLIENTS` WRITE;
+/*!40000 ALTER TABLE `CLIENTS` DISABLE KEYS */;
+INSERT INTO `CLIENTS` VALUES (1,'Doe','Jhon','1337 Unknown Area','06400','Cannes','+334000000'),(2,'Lorem','Ipsum','777 Leet Area','06400','Cannes','+334000000'),(3,'Ipsum','Lorem','999 Plot Area','06150','Cannes La Bocca','+334000000'),(4,'Doe','Jane','1337 Unknown Area','06400','Cannes','+334000000'),(5,'Norris','Chuck','9999 Everywhere you can imagine','06110','Le Cannet','+334000000');
+/*!40000 ALTER TABLE `CLIENTS` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `CONTRATS`
+--
+
+DROP TABLE IF EXISTS `CONTRATS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `CONTRATS` (
+  `CO_ID` int(11) NOT NULL,
+  `CO_DATE` date NOT NULL,
+  `CO_CATEGORIE` varchar(30) NOT NULL,
+  `CO_BONUS_MALUS` float NOT NULL,
+  `CO_CLIENT_FK` int(11) NOT NULL,
+  `CO_VU_FK` int(11) DEFAULT NULL,
+  `CO_VT_FK` int(11) DEFAULT NULL,
+  `CO_AG_FK` int(11) NOT NULL,
+  PRIMARY KEY (`CO_ID`),
+  KEY `CO_CLIENT_FK` (`CO_CLIENT_FK`),
+  KEY `fk_CONTRATS_1_idx1` (`CO_VU_FK`),
+  KEY `fk_CONTRATS_3_idx` (`CO_AG_FK`),
+  KEY `fk_CONTRATS_1_idx2` (`CO_VT_FK`),
+  CONSTRAINT `CONTRATS_ibfk_1` FOREIGN KEY (`CO_CLIENT_FK`) REFERENCES `CLIENTS` (`CL_ID`),
+  CONSTRAINT `fk_CONTRATS_1` FOREIGN KEY (`CO_VT_FK`) REFERENCES `VEHICULE_TOURISME` (`VT_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_CONTRATS_2` FOREIGN KEY (`CO_VU_FK`) REFERENCES `VEHICULE_UTILITAIRE` (`VU_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_CONTRATS_3` FOREIGN KEY (`CO_AG_FK`) REFERENCES `AGENCES` (`AG_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `CONTRATS`
+--
+
+LOCK TABLES `CONTRATS` WRITE;
+/*!40000 ALTER TABLE `CONTRATS` DISABLE KEYS */;
+INSERT INTO `CONTRATS` VALUES (1,'2003-07-08','Tout risque',0.5,1,1,1,1),(2,'1990-07-08','Tiers',1.5,2,1,1,1),(3,'2019-07-08','Tiers',0.7,1,1,1,1),(4,'2016-07-08','Tout risque',0.75,3,1,1,1),(5,'2020-07-08','Tiers Étendu',0.6,5,1,1,1),(6,'1971-01-01','Tout risque',0,4,1,1,1);
+/*!40000 ALTER TABLE `CONTRATS` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `EMPLOYES`
+--
+
+DROP TABLE IF EXISTS `EMPLOYES`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `EMPLOYES` (
+  `EM_ID` int(11) NOT NULL,
+  `EM_NOM` varchar(30) NOT NULL,
+  `EM_PRENOM` varchar(30) NOT NULL,
+  `EM_TEL` varchar(15) NOT NULL,
+  `EM_AG_FK` int(11) NOT NULL,
+  PRIMARY KEY (`EM_ID`),
+  KEY `fk_EMPLOYES_1_idx` (`EM_AG_FK`),
+  CONSTRAINT `fk_EMPLOYES_1` FOREIGN KEY (`EM_AG_FK`) REFERENCES `AGENCES` (`AG_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `EMPLOYES`
+--
+
+LOCK TABLES `EMPLOYES` WRITE;
+/*!40000 ALTER TABLE `EMPLOYES` DISABLE KEYS */;
+INSERT INTO `EMPLOYES` VALUES (1,'Macron','Manu','09000000000',1);
+/*!40000 ALTER TABLE `EMPLOYES` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `VEHICULE_TOURISME`
+--
+
+DROP TABLE IF EXISTS `VEHICULE_TOURISME`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `VEHICULE_TOURISME` (
+  `VT_ID` int(11) NOT NULL,
+  `VT_PORTE` int(11) NOT NULL,
+  `VT_NB_PASSAGER` tinyint(4) NOT NULL,
+  `VT_MARQUE` varchar(30) NOT NULL,
+  `VT_PUISSANCE` varchar(10) NOT NULL,
+  `VT_IMMATRICULATION` varchar(45) NOT NULL,
+  `VT_CARTE_GRISE` varchar(45) NOT NULL,
+  PRIMARY KEY (`VT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `VEHICULE_TOURISME`
+--
+
+LOCK TABLES `VEHICULE_TOURISME` WRITE;
+/*!40000 ALTER TABLE `VEHICULE_TOURISME` DISABLE KEYS */;
+INSERT INTO `VEHICULE_TOURISME` VALUES (1,3,5,'WV','5','00-AAA-00','868686');
+/*!40000 ALTER TABLE `VEHICULE_TOURISME` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `VEHICULE_UTILITAIRE`
+--
+
+DROP TABLE IF EXISTS `VEHICULE_UTILITAIRE`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `VEHICULE_UTILITAIRE` (
+  `VU_ID` int(11) NOT NULL,
+  `VU_POIDS` float NOT NULL,
+  `VU_LARGEUR` varchar(20) NOT NULL,
+  `VU_POIDS_CHARGE` float NOT NULL,
+  `VU_MARQUE` varchar(30) NOT NULL,
+  `VU_PUISSANCE` varchar(10) NOT NULL,
+  `VU_IMMATRICULATION` varchar(45) NOT NULL,
+  `VU_CARTE_GRISE` varchar(45) NOT NULL,
+  PRIMARY KEY (`VU_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `VEHICULE_UTILITAIRE`
+--
+
+LOCK TABLES `VEHICULE_UTILITAIRE` WRITE;
+/*!40000 ALTER TABLE `VEHICULE_UTILITAIRE` DISABLE KEYS */;
+INSERT INTO `VEHICULE_UTILITAIRE` VALUES (1,1300,'150',2500,'WV','6','11-BBB-11','858585874');
+/*!40000 ALTER TABLE `VEHICULE_UTILITAIRE` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2020-07-20 14:24:12

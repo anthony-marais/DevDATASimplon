@@ -1,0 +1,5 @@
+Employé(EM_ID,.....,#AG_ID)
+agence(AG_ID,....)
+contrat(CO_NUM,.....,#AG_ID,#CL_ID)
+erreur contrat c'est contrat(CO_NUM,.....,#AG_ID,#CL_ID,#VH_ID)
+AVENANT(AV_ID,...,#CO_ID)

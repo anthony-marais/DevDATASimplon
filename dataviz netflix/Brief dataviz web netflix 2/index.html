@@ -1,0 +1,204 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>DataViz by Anthony Marais</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="/home/virus/Mon-Depot/Brief dataviz web netflix 2/assets/css/main.css" />
+	</head>
+	<body>
+
+		<!-- Header -->
+			<header id="header" class="alt">
+				<div class="logo"><a href="index.html">DataViz <span>by Anthony Marais</span></a></div>
+				<a href="#menu">Menu</a>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="index.html">Home</a></li>					
+				</ul>
+			</nav>
+
+		<!-- Banner -->
+			<section class="banner full">
+				<article>
+					<img src="images/tech_data_font_2.jpeg" alt="" />
+					<div class="inner">
+						<header>
+							<p>DataViz by <a>Anthony Marais</a></p>
+							<h2>DataViz</h2>
+						</header>
+					</div>
+				</article>
+			
+			
+				
+			
+			</section>
+
+		<!-- One -->
+			<section id="one" class="wrapper style2">
+				<div class="inner">
+					<div class="grid-style">
+
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<img src="images/graphique_media_listed_in.png" alt="" />
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<p>Voici la premiere datavisualisation de notre étude</p>
+										<h2>Diagramme à barre</h2>
+									</header>
+									<p> cette étude nous montre des évolution denotre base de donnée....</p>
+									<footer class="align-center">
+										
+									</footer>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<div class="box">
+								
+								<div class="content">
+									<header class="align-center">
+										<p>mattis elementum sapien pretium tellus</p>
+										<h2>Vestibulum sit amet</h2>
+									</header>
+									<p> Cras aliquet urna ut sapien tincidunt, quis malesuada elit facilisis. Vestibulum sit amet tortor velit. Nam elementum nibh a libero pharetra elementum. Maecenas feugiat ex purus, quis volutpat lacus placerat malesuada.</p>
+									<footer class="align-center">
+										
+									</footer>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<img src="images/graphique_media_listed_in.png" alt="" />
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<p>Voici la premiere datavisualisation de notre étude</p>
+										<h2>Diagramme à barre</h2>
+									</header>
+									<p> cette étude nous montre des évolution denotre base de donnée....</p>
+									<footer class="align-center">
+										
+									</footer>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<div class="box">
+								<div class="image fit">
+									<img src="images/graphique_media_listed_in.png" alt="" />
+								</div>
+								<div class="content">
+									<header class="align-center">
+										<p>Liste de film de {{ nom }}</p>
+										<h2>Diagramme à barre</h2>
+									</header>
+									<!-- boucle pour selectionner la liste des films -->
+										<ul>{% for i in films.index %}
+										<li>{{ films.iloc[i]['title']  }}</li>
+										{% endfor %}
+										</ul>
+									<!-- fin de boucle -->
+									<p> cette étude nous montre des évolution denotre base de donnée....</p>
+									<footer class="align-center">
+										
+									</footer>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</section>
+
+				<!-- Two -->
+			<section id="two" class="wrapper style3">
+				<div class="inner">
+					<header class="align-center">
+						<p>Nam vel ante sit amet libero scelerisque facilisis eleifend vitae urna</p>
+						<h2>Morbi maximus justo</h2>
+					</header>
+				</div>
+			</section>
+
+		<!-- Three -->
+			<section id="three" class="wrapper style2">
+				<div class="inner">
+					<header class="align-center">
+						<p class="special">Nam vel ante sit amet libero scelerisque facilisis eleifend vitae urna</p>
+						<h2>Morbi maximus justo</h2>
+					</header>
+					<div class="gallery">
+						<div>
+							<div class="image fit">
+								<a href="#"><img src="images/graphique_media_listed_in.png" alt=""" /></a>
+							</div>
+						</div>
+						
+						
+						
+					</div>
+				</div>
+			</section>
+
+
+			<footer id="footer">
+				
+				
+				
+				<div class="inner">
+				
+				
+				
+					<div class="content">
+						<section>
+							<h3>DATAVIZ NETFLIX</h3>
+							<p>Nunc lacinia ante nunc ac lobortis.</p>
+						</section>
+					
+						<section>
+							<h4>Magna sed ipsum</h4>
+							<ul class="plain">
+								
+								<li><a href="#"><i class="icon fa-github">&nbsp;</i>Github</a></li>
+							</ul>
+						</section>
+					</div>
+					
+					
+					<p>Date et heure de la création du contenu {{ time_stamp }}</p>
+					
+					
+					<div class="copyright">
+						&copy; Untitled. Photos <a href="https://unsplash.co">Unsplash</a>, Video <a href="https://coverr.co">Coverr</a>.
+					</div>
+				</div>
+		
+		
+		
+			</footer>
+
+
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

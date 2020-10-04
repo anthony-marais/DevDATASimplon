@@ -1,0 +1,401 @@
+	Requêtes simple 
+
+requêtes de selection : SELECT
+Eviter les doublons : DISTINCT 
+renommer une colonne : AS
+Trier les résultats : ORDER BY
+Limiter le nombre de lignes de résultat : TOP/LIMIT
+Restreindre les résultats : WHERE , IN , AND , OR , BETWEEN
+
+
+
+sudo mysql
+
+mysql -h localhost -u root -p
+
+Viruscloud1:
+
+
+show databases
+
+create database simplon ;
+
+show database ;
+
+use simplon ;
+
+source /home/dev/Downloads/jeux_video.sql ;
+
+show tables ;
+
+show columns from jeux_video ;
+
+| Field            | Type         | Null | Key | Default | Extra          |
++------------------+--------------+------+-----+---------+----------------+
+| ID               | int unsigned | NO   | MUL | NULL    | auto_increment |
+| nom              | varchar(255) | NO   |     | NULL    |                |
+| possesseur       | varchar(255) | NO   |     | NULL    |                |
+| console          | varchar(255) | NO   |     | NULL    |                |
+| prix             | double       | NO   |     | 0       |                |
+| nbre_joueurs_max | int          | NO   |     | 0       |                |
+| commentaires     | text         | NO   |     | NULL    |                |
++------------------+--------------+------+-----+---------+--
+1)
+select nom,console from jeux_video;
+
+2)
+SELECT nom FROM jeux_video WHERE console = 'SuperNES' ORDER BY nom;
+
+Aladin             
+Super Mario Bros 3
+Yoshi's Island
+3)
+SELECT possesseur FROM jeux_video WHERE nom = 'Street Fighter 2';
+
+
+
+Patrick
+
+4)
+SELECT nom,console,prix  FROM jeux_video ORDER BY prix ASC LIMIT 4;
+
+| Sonic            | Megadrive |    2 |
+| The Rocketeer    | NES       |    2 |
+| Super Mario Bros | NES       |    4 |
+| Tetris           | Gameboy   |    5 |
+
+
+5)
+SELECT nom,possesseur FROM jeux_video WHERE possesseur LIKE '%O%';
++-------------------------------------------+------------+
+| nom                                       | possesseur |
++-------------------------------------------+------------+
+| Super Mario Bros                          | Florent    |
+| Zelda : ocarina of time                   | Florent    |
+| Mario Kart 64                             | Florent    |
+| Yoshi's Island                            | Florent    |
+| Commandos 3                               | Florent    |
+| Pokemon Rubis                             | Florent    |
+| SSX 3                                     | Florent    |
+| Time Crisis 3                             | Florent    |
+| Diablo                                    | Florent    |
+| Gundam Battle Assault 2                   | Florent    |
+| Spider-Man                                | Florent    |
+| Tetris                                    | Florent    |
+| Sydney 2000                               | Florent    |
+| Crazy Taxi                                | Florent    |
+| Qui Veut Gagner Des Millions              | Florent    |
+| Taxi 3                                    | Corentin   |
+| Indiana Jones Et Le Tombeau De L'Empereur | Florent    |
+| Half-Life                                 | Corentin   |
+| Rollercoaster Tycoon                      | Florent    |
++-------------------------------------------+------------+
+
+6)
+SELECT nom FROM jeux_video WHERE console = 'PC' AND nbre_joueurs_max BETWEEN 4 AND 12 ;
++-------------+
+| nom         |
++-------------+
+| Commandos 3 |
+| Starcraft   |
+| Homeworld 2 |
++-------------+
+
+
+7)
+SELECT DISTINCT console FROM jeux_video ;
++-------------+
+| console     |
++-------------+
+| NES         |
+| Megadrive   |
+| Nintendo 64 |
+| GameCube    |
+| Xbox        |
+| PC          |
+| SuperNES    |
+| PS2         |
+| GBA         |
+| PS          |
+| Gameboy     |
+| Dreamcast   |
++-------------+
+
+8)
+SELECT DISTINCT console, MAX(prix) FROM jeux_video GROUP BY console HAVING MAX(prix) <15 ;
++----------+-----------+
+| console  | MAX(prix) |
++----------+-----------+
+| NES      |         7 |
+| SuperNES |        10 |
+| Gameboy  |         5 |
++----------+-----------+
+
+9)
+SELECT DISTINCT console FROM jeux_video GROUP BY console HAVING MAX(nbre_joueurs_max) <=4 ;
++-------------+
+| console     |
++-------------+
+| NES         |
+| Megadrive   |
+| Nintendo 64 |
+| GameCube    |
+| SuperNES    |
+| PS2         |
+| GBA         |
+| PS          |
+| Gameboy     |
+| Dreamcast   |
++-------------+
+
+10)
+SELECT nom,possesseur FROM jeux_video WHERE nom LIKE 'B%' or nom LIKE 'F%' AND possesseur LIKE '%e%' ;
++---------+------------+
+| nom     | possesseur |
++---------+------------+
+| FIFA 64 | Michel     |
+| F-ZERO  | Mathieu    |
++---------+------------+
+
+où 
+
+SELECT nom,possesseur FROM jeux_video WHERE possesseur LIKE '%e%' AND ( nom LIKE 'B%' or nom LIKE 'F%') ;
++---------+------------+
+| nom     | possesseur |
++---------+------------+
+| FIFA 64 | Michel     |
+| F-ZERO  | Mathieu    |
++---------+------------+
+
+ATTENTION !  Dans le dernier exemple on peut voir l'erreur produit par le AND ('%e%' and 'B%') or 'F%' à bien prendre en compte.
+
+SELECT nom,possesseur FROM jeux_video WHERE possesseur LIKE '%e%' AND nom LIKE 'B%' or nom LIKE 'F%' ;
++-----------------+------------+
+| nom             | possesseur |
++-----------------+------------+
+| Final Fantasy X | Patrick    |
+| FIFA 64         | Michel     |
+| F-ZERO          | Mathieu    |
++-----------------+------------+
+
+SELECT champ1
+FROM (SELECT champ1, champ2 FROM toto)
+WHERE champ='FR'
+
+
+SELECT champ 1 FROM (SELECT champ1, champ2 FROM toto) WHERE champ = fr
+
+
+
+SELECT console from jeux video GROUP BY console HAVING max(prix) =<15 ;
+
+
+8) bis peut servir differement
+
+SELECT DISTINCT console FROM jeux_video WHERE console NOT IN (SELECT console from jeux_video  WHERE prix >14) ;
+
+
+Selectionné le prix moyens
+
+SELECT AVG (prix) from jeux_video ;
++------------+
+| AVG (prix) |
++------------+
+|      28.34 |
++------------+
+
+
+SELECT AVG (prix) from jeux_video where console = 'Xbox';
+
+
+SELECT AVG prix from jeux_video ;
+
+
+
+
+
+select console, avg(prix) as prix_moyen FROM jeux_video group by console ;
++-------------+--------------------+
+| console     | prix_moyen         |
++-------------+--------------------+
+| NES         |  4.333333333333333 |
+| Megadrive   |                  9 |
+| Nintendo 64 |               21.5 |
+| GameCube    |               47.5 |
+| Xbox        |               48.3 |
+| PC          | 36.333333333333336 |
+| SuperNES    |  8.666666666666666 |
+| PS2         |  28.11111111111111 |
+| GBA         |               34.5 |
+| PS          |                 26 |
+| Gameboy     |                  5 |
+| Dreamcast   | 12.666666666666666 |
++-------------+--------------------+
+12 rows in set (0.00 sec)
+
+select console, ROUND (avg(prix),2) as prix_moyen FROM jeux_video group by console ;
+
+
+select console, ROUND (avg(prix),2) as prix_moyen FROM jeux_video group by console ;
++-------------+------------+
+| console     | prix_moyen |
++-------------+------------+
+| NES         |       4.33 |
+| Megadrive   |       9.00 |
+| Nintendo 64 |      21.50 |
+| GameCube    |      47.50 |
+| Xbox        |      48.30 |
+| PC          |      36.33 |
+| SuperNES    |       8.67 |
+| PS2         |      28.11 |
+| GBA         |      34.50 |
+| PS          |      26.00 |
+| Gameboy     |       5.00 |
+| Dreamcast   |      12.67 |
++-------------+------------+
+
+
+nombre de jeux sur xbox
+
+select COUNT(nom) FROM jeux_video WHERE console = "Xbox" ;
++------------+
+| COUNT(nom) |
++------------+
+|         10 |
++------------+
+
+combien de jeux par console
+
+select COUNT(nom) FROM jeux_video GROUP BY console ;
++------------+
+| COUNT(nom) |
++------------+
+|          3 |
+|          3 |
+|          4 |
+|          2 |
+|         10 |
+|          6 |
+|          3 |
+|          9 |
+|          2 |
+|          4 |
+|          1 |
+|          3 |
++------------+
+
+
+select  max(prix) FROM jeux_video ;
++-----------+
+| max(prix) |
++-----------+
+|        60 |
++-----------+
+
+les jeux le plus cher par console
+
+select nom from jeux_video WHERE prix = (SELECT max(prix) from jeux_video ) ;
++----------------------------------------+
+| nom                                    |
++----------------------------------------+
+| Dead or Alive                          |
+| Dead or Alive Xtreme Beach Volley Ball |
++----------------------------------------+
+
+select nom,console,prix from jeux_video WHERE prix = (SELECT max(prix) from jeux_video ) ;
++----------------------------------------+---------+
+| nom                                    | console |
++----------------------------------------+---------+
+| Dead or Alive                          | Xbox    |
+| Dead or Alive Xtreme Beach Volley Ball | Xbox    |
++----------------------------------------+---------+
+
+select nom,console,prix from jeux_video WHERE prix = (SELECT max(prix) from jeux_video ) ;
++----------------------------------------+---------+------+
+| nom                                    | console | prix |
++----------------------------------------+---------+------+
+| Dead or Alive                          | Xbox    |   60 |
+| Dead or Alive Xtreme Beach Volley Ball | Xbox    |   60 |
++----------------------------------------+---------+------+
+
+prix de tout les jeux xbox
+
+
+SELECT sum(prix) from jeux_video WHERE console = "xbox" ;
++-----------+
+| sum(prix) |
++-----------+
+|       483 |
++-----------+
+
+prix de tout les jeux par console
+
+
+SELECT console, sum(prix) from jeux_video GROUP BY console ;
++-------------+-----------+
+| console     | sum(prix) |
++-------------+-----------+
+| NES         |        13 |
+| Megadrive   |        27 |
+| Nintendo 64 |        86 |
+| GameCube    |        95 |
+| Xbox        |       483 |
+| PC          |       218 |
+| SuperNES    |        26 |
+| PS2         |       253 |
+| GBA         |        69 |
+| PS          |       104 |
+| Gameboy     |         5 |
+| Dreamcast   |        38 |
++-------------+-----------+
+
+
+CREATE VIEW jeux_dispo AS ( SELECT nom , possesseur, console FROM jeux_video WHERE console <> 'Gemeboy');
+
+SELECT * FROM jeux_dispo ;
+
+DROP VIEW jeux_dispo ;
+
+ALTER VIEW jeux_dispo AS (..........) ;
+
+
+
+
+
+CREATE DATABASE IF NOT EXISTS ASSURAUTO ;
+USE ASSURAUTO ;
+
+CREATE TABLE IF NOT EXISTS CLIENTS(
+CL_ID INT NOT NULL PRIMARY KEY,
+CL_NOM VARCHAR(30) NOT NULL,
+CL_PRENOM VARCHAR(30) NOT NULL,
+CL_ADRESSE VARCHAR(50) NOT NULL,
+CL_CODEPOSTAL CHAR(5) NOT NULL CHECK(CL_CODEPOSTAL = '06400') ,
+CL_VILLE VARCHAR(30) NOT NULL CHECK(CL_VILLE = 'Cannes'),
+CL_TELEPHONE VARCHAR(15) NOT NULL,
+CL_FAX VARCHAR(15) NOT NULL,
+CL_MAIL VARCHAR(40) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS CONTRAT(
+CO_NUMERO INT NOT NULL PRIMARY KEY,
+CO_DATE DATE NOT NULL,
+CO_CATEGORIE CHAR(20) NOT NULL ,
+CO_BONUS FLOAT NOT NULL ,
+CO_MALUS FLOAT NOT NULL ,
+CO_CLIENT_FK INT NOT NULL,
+FOREIGN KEY (CO_CLIENT_FK) REFERENCES CLIENTS(CL_ID)
+);
+
+INSERT INTO CLIENTS (CL_ID, CL_NOM, CL_PRENOM, CL_ADRESSE, CL_CODEPOSTAL, CL_VILLE, CL_TELEPHONE, CL_FAX, CL_MAIL) VALUES
+	(1, 'Willice', 'Brousse', '18 rue Bidon', '06400', 'Cannes', '0623303030', '0909090909','devdata@cannes.fr'),
+	(2, 'Wil', 'Pawtowski' ,'17 rue bidon', '06400', 'Cannes', '0606060606', '4909090909', 'xx.xx@xx.xx');
+
+INSERT INTO CONTRAT (CO_NUMERO, CO_DATE, CO_CATEGORIE, CO_BONUS, CO_MALUS, CO_CLIENT_FK) VALUES
+(1, '2020-07-08' , 'TIERS' , 2.5 , 0, 1),
+(2, '2019-05-22' , 'TOUT RISQUE' , 0, 1.2, 2);
+
+SELECT * FROM CONTRAT;
+SELECT * FROM CLIENTS;
+
+

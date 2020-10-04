@@ -1,0 +1,13 @@
+le SGBD 
+
+les budget alloué au déploiement
+la plate forme sur laquelle il doit fonctionner
+le volume de données stockées
+le ratio écriture/lecture
+
+client graphique 
+
+phpMyadmin
+Adminer
+SQLectron
+MySQL Workbench

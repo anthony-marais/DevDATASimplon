@@ -1,0 +1,32 @@
+un programme est un séquence d'insructions 
+on parle souvent d'un script Python
+un script se présente sou sla forme d'un fichier texte en .py
+
+sa force est son nombre de bibliothèques
+
+bibliothèques = ensemble de fonctions , elles sont regroupées et mises a disposition afin de pouvoir être utilisées sans avoir à les réecrire 
+
+un bibliothèques doit être importé pour être utilisée. ( utilitaire pip , import )
+
+NumPy : 
+
+SciPy:
+
+Pandas : Manipulation et l'analyse de données ( numériques et temporelle -> DataFrame , Panels )
+
+Matplotlib: Permet de tracer et de visualiser des données sous forme de graph
+
+Tensoflow:
+
+Scikit-learn:
+
+
+un serpent peut en cacher un autre ANACONDA
+
+Spyder est un IDE pour python:
+
+Jupyter Notebook: App web permet a l'user d'interagir avec le code (shift  + entrée = run)
+
+
+
+Variable : un emplacement émoire que l'on peut réferencer

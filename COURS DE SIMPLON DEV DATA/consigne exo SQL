@@ -1,0 +1,6 @@
+# 1.Reécrire requêtes en utilisant des vues
+
+# 2.Créer des procédures stockées(basées sur les requêtes des semaines passées) avec des paramètres pertinents(ex: nom acteur,
+# titre du film, etc) 
+
+# 3.Créer une fonction scalaire qui concatene 2 chaines, et l'utiliser pour concatener nom et prénom des acteurs/actrices.
