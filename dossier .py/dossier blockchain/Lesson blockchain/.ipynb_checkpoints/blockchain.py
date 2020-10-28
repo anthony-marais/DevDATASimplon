@@ -46,7 +46,17 @@ def print_blockchain_elements():
 
 
 
-
+def verify_chain():
+    """ Verify the last block is valid and is include data of """
+    block_index = 0
+    is_valid = True
+    for block in blockchain:
+        if block[0] == blockchain[block_index - 1]:
+            is_valid = True
+        else:
+            is_valid = False
+            break
+    return is_valid
 
 
 while True:
