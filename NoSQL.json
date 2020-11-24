@@ -1,0 +1,27 @@
+{
+    "code":"api04",
+    "titre":"DW et NOSQL",
+    "description":"un cours sur les datawarehouse et nosql",
+    "crédits":3,
+    "prérequis": [
+                    "code":"cours01",
+                    "code":"cours02",
+                    "code":"cours03"
+                    ]
+
+}
+
+
+{
+    "nom" : "Trump",
+    "prenom":"Donald",
+    "adresse": {
+                    "numero_rue" : 27,
+                    "rue":"Boulevard bidon",
+                    "ville":"Washinton DC",
+                    "code_postal": 123456
+                }
+}
+
+
+
