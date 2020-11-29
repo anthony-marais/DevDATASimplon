@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+	<title>Netflix</title>
+</head>
+
+
+<body>
+	
+	<div align="middle">
+		<img src="{{url_for('static', filename='img/netflix.jpg')}}">
+
+	
+    <h1>Liste des films produit par : {{nom}}</h1>
+    <table>
+
+		<tr>
+			<th>Titre</th>
+		</tr>
+		
+		{% for i in films_dir.index: %}
+        <tr>
+            <td>{{ films_dir.iloc[i]['title'] }}</td>
+        </tr>
+		{% endfor %}
+       
+    </table>
+	
+	<img src="{{url_for('static', filename='img/categorie.png')}}" alt="Catégorie" />
+	</div>	
+
+	<footer> 
+	{{ time_stamp }}
+	</footer> 
+
+</body>
+</html>
+
+
