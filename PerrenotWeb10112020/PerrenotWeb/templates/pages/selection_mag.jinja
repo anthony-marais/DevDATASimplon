@@ -1,0 +1,44 @@
+{% extends 'layouts/default.html' %}
+{% block body%}
+{% include 'layouts/shared/_menu-admin.html'%}
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <form method="POST" ACTION="{{ url_for('contact') }}" >
+                    <label for ="pseudo">veuillez selectionner votre fichier excel pour extraire les magasins et leurs volumes</label>  <br>   
+                    <input type="file" id="pseudo"  name='fichier'><br>
+
+                    <label for ="date">veuillez selectionnerla date des tournées</label>  <br>  
+                    <input type="date" id="date"  name='date'><br>
+
+                    Cochez les enseignes  :<br />
+                    {% for i in range(nbre_ens): %}
+                                
+                        <input type="checkbox" name="liste_ens" id="{{ enseigne[i][0] }}" value="{{ enseigne[i][0] }}"/> <label for="{{ enseigne[i][0] }}">{{ enseigne[i][0] }}</label><br />
+                    {% endfor %} 
+                     <input type='submit' value='Se connecter' class="btn btn-danger" >
+                </form>
+
+            </div>
+        </div>  
+    </div>
+            <script type="text/javascript">
+            function ens_select(liste_ens) {
+                   if (liste_ens.checked)
+                        {
+                    alert ("hiiiiiiiiiiiiiiiiiiiii");
+                        } 
+                    else 
+                        {
+                            alert ("bye");
+                        }
+            </script>
+            
+             
+             
+           
+
+            
+    
+{% endblock %}

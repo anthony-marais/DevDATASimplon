@@ -1,0 +1,127 @@
+{% extends 'layouts/default.html' %}
+{% block body%}
+{% include 'layouts/shared/_menu-admin.html'%}
+
+    
+        <div class="row">
+            <div class="col-md-4">
+                <form method="POST" ACTION="{{ url_for('selection_ens') }}" >
+                    <B><label for ="fichier">veuillez selectionner votre fichier excel pour extraire les magasins et leurs volumes:</B></label>  <br>   
+                    <input type="file" id="fichier"  name='fichier'><br>
+
+                    <B><label for ="date">veuillez selectionnerla date des tournées</label></B>  <br>  
+                    <input type="date" id="date"  name='date'><br>
+
+                    <B>Cochez les enseignes  :</B> <br />
+                    <div >
+                        <ul>
+                            {% for i in range(nbre_ens): %}
+                                      
+                                <li>    <input type="checkbox" name="liste_ens" id="ens_id_{{ L_enseigne[i][0] }}" value="{{ L_enseigne[i][0] }}"/> <label for="ens_id_{{ L_enseigne[i][0] }}">{{ L_enseigne[i][1] }}</label></li>
+                                
+                            {% endfor %}
+                        </ul>
+                    </div> 
+                    
+                    <br><input type='submit' value='Afficher les magasins' class="btn btn-danger" >
+                    
+                </form>
+            </div>
+            <div class="col-md-4">
+                {% if test==True :%}
+                    <div class="container border border_secondary rounded-lg">  
+                        <!--<label for ="pseudo"><B> veuillez selectionner les magasins à livrer de chaque enseigne</B> </label>  <br>-->
+                        <div class="m-3">
+                            <h5 class="card-title text-center">Enseignes</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">veuillez selectionner les magasins à livrer de chaque enseigne</h6>
+                        </div>
+                        <form method="POST" ACTION="{{ url_for('contact') }}" class="w-100 mt-4 overflow-x-scroll" >
+                            {% set cpt = 0 %}
+                            {% for i in range(nbre_ens_selec): %}
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr class="d-flex">
+                                            <th scope="col" class="w-25"> {{enseigne_intit[i][1]}} :</th> 
+                                            <th scope="col" style="width:18%;"> Nbre rolls :</th>
+                                            <th scope="col" style="width:21%;">Nbre palettes :</th>
+                                            <th scope="col" style="width:16%;">Nbre box :</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>   
+                                    {% for j in liste_mag[i] %} 
+                                            <tr class="d-flex">
+                                                <td class="col-sm-3"><input type="checkbox" name="mag" id="{{ j }}" value="{{ j[0] }}"/>  {{ j[1] }}</td>
+                                                <td style="width:18%;"><input type="number" for="{{ j }}" class="mw-100" value=" " size="2" name="rolls" ></td>
+                                                <td style="width:21%;"><input type="number"  for="{{ j }}" class="mw-100" value=" " size="2" name="palette" > </td>
+                                                <td style="width:16%;"><input type="number" for="{{ j }}" class="mw-100" value=" " size="2" name="box" ></td>
+                                            </tr>    
+                                            {% set cpt = cpt+ 1 %}
+                                    {% endfor %}
+                                    </tbody>
+                                </table>    
+                            {% endfor %}
+                        
+                    </form>
+             </div>        
+             </div>  
+                        <div class="col-md-4"> 
+                         <div class="container border border_secondary rounded-lg">  
+                            <div class="m-2">
+                            <h5 class="card-title text-center">Camions</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">veuillez cochez les camions :</h6>
+                        </div>
+                        <!--<B>Cochez les camions :</B><br /><br />-->
+                                <!--<form>
+                                    
+                                         
+                                        <ul class="two-col">
+                                        {% for i in range(nbre_camion): %}
+                                            <li><input type="checkbox" name="liste_camion" id="{{ camion[i][0] }}" value="{{ camion[i][0] }}"/> <label for="{{ camion[i][0] }}">{{ camion[i][0] }}</label></li>
+                                        {% endfor %} 
+                                        </ul>
+                                    <input type='submit' value='Effectuer les tournées' class="btn btn-danger" >
+                                </form>-->
+                            <form>
+                                <div class="form-row">
+                                {% for i in range(nbre_camion): %}
+                                <div class="form-group col-md-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="liste_camion" id="{{ camion[i][0] }}" value="{{ camion[i][0] }}">
+                                        <label class="form-check-label" for="defaultCheck1">
+                                            {{ camion[i][0] }}
+                                        </label>
+                                    </div>
+                                </div>
+                                {% endfor %} 
+                                </div>
+                                <button type="submit" class="btn btn-block btn-primary">Effectuer les tournées</button>
+                            </form>
+                        </div>            
+                    </div>
+                {% endif %}
+                </div>
+            </div>
+            
+        </div>  
+    </div>
+    
+            <!--<script type="text/javascript">
+                $('input[id^=ens_id_]').change(function(){
+                   if ($(this).is(":checked"))
+                        {
+                    alert ("hiiiiiiiiiiiiiiiiiiiii");
+                        } 
+                    else 
+                        {
+                            alert ("bye");
+                        }
+                })
+            </script>-->
+            
+             
+             
+           
+
+            
+    
+{% endblock %}

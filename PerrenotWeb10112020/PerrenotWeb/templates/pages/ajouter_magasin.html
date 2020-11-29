@@ -1,0 +1,81 @@
+{% extends 'layouts/default.html' %}
+{% block body%}
+{% include 'layouts/shared/_menu-admin.html'%}
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<div class="container">    
+        
+    <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3"> 
+        
+        <div class="panel panel-default" >
+            <div class="panel-heading">
+                <div class="panel-title text-center">Ajouter un nouveau magasin</div>
+            </div>     
+
+            <div class="panel-body" >
+                <div class="border border_secondary rounded-sm">
+                    <form ACTION="{{ url_for('ajouter_magasin') }}" name="ajout_mag" id="form" class="form-horizontal default" enctype="multipart/form-data" method="POST" >
+                    
+                        <div class="input-group">
+                        
+                            <select name="liste_ens" required>
+                                <option value="" disabled selected>  Choisissez une enseigne</option>
+                                
+                                                                
+                                    {% for i in range(nbre_ens) %}
+                                        {% if enseigne[i][0]==enseigneS: %}
+                                        <label> bonjour {{ enseigneS }}</label>
+                                            <option value="{{enseigne[i][0]}}" selected>  {{enseigne[i][1]}} </option>
+                                        {% else: %}
+                                            <option value="{{enseigne[i][0]}}">  {{enseigne[i][1]}} </option>
+                                        {% endif %}    
+                                    {% endfor %}
+                                    
+                            </select>
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for ="code">Code Magasin:</label>
+                            <input id="code" type="text" class="form-control" name="code" value="{{code}}" required >                                        
+                        </div>
+
+                        <div class="input-group">
+                            <label for ="adresse">Adresse du magasin:</label>
+                            <input id="adresse" type="text" class="form-control" name="adresse" value="{{adresse}}" required >                                        
+                        </div>    
+                        <div class="input-group">
+                            <label for ="heure">Heure de livraison du magasin:</label>
+                            <input id="heure" type="time" class="form-control" name="heure" value="{{heure}}" required >                                        
+                        </div>                                                              
+                        <div class="input-group">
+                            <label for ="rolls">tarif Rolls:</label>
+                            <input id="rolls" type="number" class="form-control" name="rolls" value="{{rolls}}" >                                        
+                        </div> 
+                        <div class="input-group">
+                            <label for ="pallete">tarif Palette:</label>
+                            <input id="pallete" type="number" class="form-control" name="palette" value="{{palette}}" >   
+                                                                    
+                        </div>
+                        
+                        <div class="input-group">
+                            <label for ="boxe">tarif boxe:</label>
+                            <input id="box" type="number" class="form-control" name="boxe" value="{{boxe}}" >                                      
+                        </div>   
+                        
+                            <div >
+                                <button type="submit" href="#" class="btn btn-primary"> Ajouter</button> 
+                                <button type="reset" class="btn btn-primary" > Annuler</button>                         
+                            </div>
+                        
+
+                    </form>     
+                </div>
+            </div>                     
+        </div>  
+    </div>
+</div>
+
+
+{% endblock%} 
