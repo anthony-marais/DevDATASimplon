@@ -1,2 +1,0 @@
-SHOW databases;
-USE sakila ;
